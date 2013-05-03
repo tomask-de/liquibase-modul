@@ -31,8 +31,13 @@ public class LiquibaseFrameTest {
     @Test
     public void initializeDatabase() throws LiquibaseException, SQLException {
         sut.updateDatabase("create_admins.xml");
+        asserAdmin();
+    }
+
+    private void asserAdmin() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT username FROM admins ORDER BY id_admin DESC");
         ResultSet resultSet = preparedStatement.executeQuery();
+
         Assert.assertTrue(resultSet.next());
         Assert.assertEquals("admin", resultSet.getString(1));
         Assert.assertFalse(resultSet.next());

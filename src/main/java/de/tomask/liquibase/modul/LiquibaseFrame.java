@@ -25,4 +25,9 @@ public final class LiquibaseFrame {
         Liquibase liquibase = new Liquibase(changelog, new ClassLoaderResourceAccessor(), database);
         liquibase.update("");
     }
+
+    public void updateDatabase() throws LiquibaseException {
+        Liquibase liquibase = new Liquibase("create_admins.xml", new ClassLoaderResourceAccessor(), database);
+        liquibase.update("");
+    }
 }
